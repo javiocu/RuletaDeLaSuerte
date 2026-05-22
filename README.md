@@ -2,7 +2,7 @@
 
 # 🤫 ProyectoSecreto
 
-Este proyecto consiste en el desarrollo de una aplicación interactiva inspirada en el famoso concurso de televisión **"La Ruleta de la Suerte"**. Está diseñada especialmente para ejecutarse en una torre con Windows 11 utilizando una pantalla táctil.
+Este proyecto consiste en el desarrollo de una aplicación interactiva inspirada en el famoso concurso de televisión **"La Ruleta de la Suerte"**. Está diseñada especialmente para ejecutarse utilizando una pantalla táctil.
 
 ## 🌟 Características Principales
 
