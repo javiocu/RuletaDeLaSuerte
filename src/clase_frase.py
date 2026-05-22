@@ -2,7 +2,7 @@
 Entrará una frase que debe separarse en filas. Puedo crear una clase que se
 tenga diferentes características para las frases"""
 
-class Frase():
+class Frase:
     """Clase asociada a las frases. Servirá para tratarlas y procesarlas"""
 
     numero_total_caracteres = 12                    # Variables de clase:
