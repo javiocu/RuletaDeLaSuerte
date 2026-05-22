@@ -19,10 +19,25 @@ class Frase():
         self.fila4 = []
 
     def __separar_palabras__(self) -> list:
+        """Método que separa las palabras, generando una lista
+
+        Returns:
+            list: lista de palabras
+        """
         lista_palabras = self.texto_frase.split(" ")
         return lista_palabras
 
     def __sacar_caracteres__(self, lista:list) -> int:
+        """Método que calcula el número de caracteres totales de una lista de 
+        palabras que se le pase. Se usará principalmente para contar los
+        caracteres en las filas.
+
+        Args:
+            lista (list): Lista de palabras para contar lo caracteres totales
+
+        Returns:
+            int: Número total de caracteres de la lista de palabras
+        """
         caracteres_totales = 0
         for palabra in lista:
             caracteres_totales += len(palabra)
