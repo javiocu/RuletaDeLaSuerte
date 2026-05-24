@@ -2,21 +2,27 @@
 Entrará una frase que debe separarse en filas. Puedo crear una clase que se
 tenga diferentes características para las frases"""
 
-class Frase:
+from PyQt6.QtCore import QObject, pyqtProperty, pyqtSignal
+
+class Frase(QObject):
     """Clase asociada a las frases. Servirá para tratarlas y procesarlas"""
 
     numero_total_caracteres = 12                    # Variables de clase:
                                                     # Número total de caracteres por fila
     def __init__(self, texto_frase:str) -> None:
+        super().__init__()                          # Llamo a super para tener los métodos del padre QObject
+        
         self.texto_frase = texto_frase              # Variables de instancia: 
         self.longitud = len(texto_frase)            # - la frase en sí - Su longitud
         self.numero_filas = 1
         self.lista_palabras = self.__separar_palabras__()
-
+        
         self.fila1 = []
         self.fila2 = []
         self.fila3 = []
         self.fila4 = []
+        
+        self.filas = self.separar_en_filas()
 
     def __separar_palabras__(self) -> list:
         """Método que separa las palabras, generando una lista
@@ -65,8 +71,33 @@ class Frase:
         except ValueError as value_er:
             print(f"{value_er}: Illo la frase no cabe máquina, prueba otra")
 
-        partes_dic = {"fila1":self.fila1,
+        self.partes_dic = {"fila1":self.fila1,
                       "fila2":self.fila2, 
                       "fila3":self.fila3, 
                       "fila4":self.fila4}
-        return partes_dic
+
+   # @pyqtProperty(str)
+    def fila1_propi(self) -> str:
+        """Propiedad para qml que envía la fila 1"""
+        return (" ").join(self.fila1)
+
+    @pyqtProperty(str)
+    def fila2_propi(self) -> list:
+        """Propiedad para qml que envía la fila 2"""
+        return self.partes_dic["fila2"]
+
+    @pyqtProperty(str)
+    def fila3_propi(self) -> list:
+        """Propiedad para qml que envía la fila 3"""
+        return self.partes_dic["fila3"]
+
+    @pyqtProperty(str)
+    def fila4_propi(self) -> list:
+        """Propiedad para qml que envía la fila 4"""
+        return self.partes_dic["fila4"]
+    
+
+if __name__ == "__main__":
+    prueba = Frase("Hola mundo")
+    print(prueba.fila1_propi())
+
