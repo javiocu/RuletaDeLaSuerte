@@ -76,28 +76,48 @@ class Frase(QObject):
                       "fila3":self.fila3, 
                       "fila4":self.fila4}
 
-   # @pyqtProperty(str)
+    # Voy a usar el método center para rellenar los espacios pero este algoritmo funcionaría:
+    
+    # def __rellenar_espacios__(self, fila) -> str:
+    #     espacios_necesarios = 0
+    #     if len(fila) == 12:
+    #         return fila
+    #     else:
+    #         espacios_necesarios = 12 - len(fila)
+
+    #     if espacios_necesarios % 2 == 0:                    # Espacios necesarios son pares
+    #         espacio_lado = int(espacios_necesarios / 2)     # Espacios a cada lado
+    #     else:                                               # Espacios necesarios son impares
+    #         espacio_lado = int((espacios_necesarios - 1)  / 2)
+    #         fila = fila + " "                               # Añado un espacio de base a la derecha
+
+    #     for i in range(espacio_lado):                       # Bucle para añadir espacios
+    #         fila = " " + fila
+    #         fila = fila + " "
+    #     return fila
+
+    @pyqtProperty(str)
     def fila1_propi(self) -> str:
         """Propiedad para qml que envía la fila 1"""
-        return (" ").join(self.fila1)
+        return (" ").join(self.fila1).center(12, " ")
 
     @pyqtProperty(str)
-    def fila2_propi(self) -> list:
+    def fila2_propi(self) -> str:
         """Propiedad para qml que envía la fila 2"""
-        return self.partes_dic["fila2"]
+        return (" ").join(self.fila2).center(12, " ")
 
     @pyqtProperty(str)
-    def fila3_propi(self) -> list:
+    def fila3_propi(self) -> str:
         """Propiedad para qml que envía la fila 3"""
-        return self.partes_dic["fila3"]
+        return (" ").join(self.fila3).center(12, " ")
 
     @pyqtProperty(str)
-    def fila4_propi(self) -> list:
+    def fila4_propi(self) -> str:
         """Propiedad para qml que envía la fila 4"""
-        return self.partes_dic["fila4"]
+        return (" ").join(self.fila4).center(12, " ")
     
 
 if __name__ == "__main__":
-    prueba = Frase("Hola mundo")
-    print(prueba.fila1_propi())
+    prueba = Frase("Prueba ")
+    print(len(prueba.fila1_propi()))
 
