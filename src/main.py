@@ -1,9 +1,34 @@
 """Módulo principal diseñado para ejecutar la aplicación"""
 
-import tkinter as tk
+import sys
+from PyQt6.QtGui import QGuiApplication
+from PyQt6.QtQml import QQmlApplicationEngine
 
-Pantalla = tk.Tk()
+from clase_frase import Frase
 
-Pantalla.mainloop()
+def ruleta_suerte():
+    # Arrancar aplicación y motor interno de qml
+    app = QGuiApplication(sys.argv) # sys.argv para que coja los argumentos de la línea de comandos
+    engine = QQmlApplicationEngine() # Creo instancia del motor de comunicación con qml para interpretar el archivo qml
 
+    # Creo intancia de frase para cargar, en el futuro se añadira la opción de
+    # cogerla desde un archivo de frases
+    frase_juego = Frase("La ruleta de la suerte")
 
+    # Arranco instancia con archivo qml del espacio
+    engine.rootContext().setContextProperty("fraseBackend", frase_juego)
+
+    # Cargo el archivo qml de interfaz gráfica
+    engine.load("src/main.qml")
+
+    # Si el archivo qml no se puede cargar, exiteo con error:
+    # rootObjetcs devuelve los objetos creados por QQmlApplicationEngine.load() 
+    if not engine.rootObjects():
+        print("Error: Illo el archivo main.qml no existe o está vacío")
+        sys.exit(-1) # -1 indicando error de ejecución
+
+    # Arranco aplicación en bucle:
+    sys.exit(app.exec())
+
+if __name__ == "__main__":
+    ruleta_suerte()

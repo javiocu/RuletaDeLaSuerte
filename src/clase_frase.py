@@ -115,9 +115,8 @@ class Frase(QObject):
     def fila4_propi(self) -> str:
         """Propiedad para qml que envía la fila 4"""
         return (" ").join(self.fila4).center(12, " ")
-    
+
 
 if __name__ == "__main__":
     prueba = Frase("Prueba ")
     print(len(prueba.fila1_propi()))
-
