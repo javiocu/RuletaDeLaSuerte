@@ -13,7 +13,7 @@ Window {
     Column {
         focus: true
         Keys.onPressed: (event) => {
-        fraseBackend.esta_letra_dicha(event.text)
+        fraseBackend.esta_letra_dicha(event.text.toUpperCase())
         }
         anchors.centerIn: parent
         spacing: 10

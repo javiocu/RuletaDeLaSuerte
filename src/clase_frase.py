@@ -121,12 +121,13 @@ class Frase(QObject):
         Returns:
             str | None: Devuelve la letra si la letra no e ha dicho
         """
-        if letra == " ":
+        if not letra.isalpha():
             return False
         elif letra in self.letras_dichas:
             print(f"La letra {letra} ya se ha dicho")
             return False
         else:
+            print(f"¡La letra {letra} es válida!")
             self.letras_dichas.add(letra)
             self.actualizar_tablero.emit()
             return True
