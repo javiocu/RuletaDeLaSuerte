@@ -1,28 +1,37 @@
-# ProyectoSecreto
+# La Ruleta de la Suerte 🎡
 
-# 🤫 ProyectoSecreto
+¡Bienvenido a **La Ruleta de la Suerte**! Este es un proyecto secreto desarrollado en Python utilizando **PyQt6** y **QML (Qt Quick)** para recrear el famoso concurso de televisión. La aplicación cuenta con una interfaz gráfica moderna, animada y una separación limpia entre la lógica del juego y el diseño visual.
 
-Este proyecto consiste en el desarrollo de una aplicación interactiva inspirada en el famoso concurso de televisión **"La Ruleta de la Suerte"**. Está diseñada especialmente para ejecutarse utilizando una pantalla táctil.
+---
 
-## 🌟 Características Principales
+## 🚀 Características Actuales
 
-*   **Panel de Letras Ocultas:** Las palabras de la frase se organizan en filas de casillas rectangulares blancas que ocultan el texto.
-*   **Modo de Búsqueda (Teclado):** Permite introducir una letra mediante el teclado. Si la letra existe en la frase, las casillas correspondientes se iluminarán en **color naranja** 🟧 como pista visual.
-*   **Modo de Revelado (Táctil):** Tras iluminarse en naranja, el usuario puede tocar físicamente cada casilla seleccionada para "darle la vuelta" y revelar la letra oculta.
-*   **Gestión de Frases:** Capacidad para procesar frases completas y dividirlas automáticamente en palabras.
+- **Frontend dinámico:** Diseñado completamente en QML con transiciones fluidas entre pantallas.
+- **Sistema de Registro:** Permite añadir múltiples jugadores de forma consecutiva desde la interfaz gráfica.
+- **Control de Duplicados:** El backend valida en tiempo real que no se introduzcan jugadores con el mismo nombre, mostrando un aviso visual interactivo.
+- **Gestión Intuitiva de Foco:** Transición automática del foco del teclado desde el campo de texto al tablero de juego al iniciar la partida.
+- **Multiplataforma Robusta:** Configurado específicamente para evitar fallos de renderizado en Windows 11 utilizando el estilo visual *Fusion*.
 
-## 🛠️ Tecnologías Utilizadas
+---
 
-*   **Lenguaje:** Python 3 🐍
-*   **Interfaz Gráfica:** `tkinter` (Librería estándar de Python) 🖼️
-*   **Entorno de Desarrollo:** VSCode sobre Windows 11 💻
-*   **Control de Versiones:** Git alojado en una instancia local de Forgejo mediante Docker 🐳
+## 🛠️ Arquitectura del Proyecto
 
-## 🚀 Cómo Ejecutar el Proyecto
+El proyecto sigue una arquitectura **MVVM / Backend-Frontend** bien definida:
 
-1. Clona este repositorio desde tu Forgejo local.
-2. Abre la carpeta del proyecto en VSCode.
-3. Ejecuta el archivo principal:
-   
+- **`src/main.py`**: El motor principal de la aplicación. Configura el entorno de Qt, instancia las clases de Python y las conecta al contexto de QML.
+- **`src/clase_frase.py`**: Gestiona la frase oculta del tablero, el estado de las letras (adivinadas/ocultas) y la distribución en las 4 filas reglamentarias.
+- **`src/clase_jugador.py`**: Maneja la entidad de los jugadores (nombre, puntuación/dinero) y la lógica de la partida (control de turnos y validación de duplicados).
+- **`src/main.qml`**: Define toda la interfaz gráfica, botones, campos de texto y la lógica de eventos del teclado (`Keys.onPressed`).
+
+---
+
+## 🔧 Requisitos e Instalación
+
+### Entorno de Desarrollo
+Este proyecto está desarrollado y testeado en una torre con **Windows 11** utilizando **Visual Studio Code** y un entorno virtual de Python (`venv`).
+
+### Dependencias
+Asegúrate de tener instalado Python 3.10 o superior y la librería de PyQt6:
+
 ```bash
-   python main.py
+pip install PyQt6
