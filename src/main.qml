@@ -10,24 +10,28 @@ Window {
     visible: true
     title: "La ruleta de la suerte"
     color: "#004d40"
-    Row {
+    Column {
         anchors.centerIn: parent
-        Repeater {
-            model: fraseBackend.fila1_propi.split("")
-            Rectangle {
-                width: 50
-                height: 50
-                color: "#ffffff"
-                border.color: "#000000"
-                border.width: 2
-
-                Text {
-                    anchors.centerIn: parent // Pone la letra en el centro del rectángulo
-                    text: modelData
-                    font.pixelSize: 24
-                }
+        spacing: 10
+        // Fila 1
+        Fila {
+            textoFila: fraseBackend.fila1_propi
+        }
+        // Fila 2
+        Fila {
+            textoFila: fraseBackend.fila2_propi
+            visible: fraseBackend.fila2_propi === "            " ? false : true
             }
+        // Fila 3
+        Fila {
+            textoFila: fraseBackend.fila3_propi
+            visible: fraseBackend.fila3_propi === "            " ? false : true
 
+        }
+        // Fila 4
+        Fila {
+            textoFila: fraseBackend.fila4_propi
+            visible: fraseBackend.fila4_propi === "            " ? false : true
         }
     }
 }
