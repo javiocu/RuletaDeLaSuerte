@@ -2,27 +2,28 @@
 Entrará una frase que debe separarse en filas. Puedo crear una clase que se
 tenga diferentes características para las frases"""
 
-from PyQt6.QtCore import QObject, pyqtProperty, pyqtSignal
+from PyQt6.QtCore import QObject, pyqtProperty, pyqtSignal, pyqtSlot
 
 class Frase(QObject):
     """Clase asociada a las frases. Servirá para tratarlas y procesarlas"""
 
-    numero_total_caracteres = 12                    # Variables de clase:
-                                                    # Número total de caracteres por fila
+    numero_total_caracteres = 12                    # Variables de clase
+    actualizar_tablero = pyqtSignal()
+
     def __init__(self, texto_frase:str) -> None:
         super().__init__()                          # Llamo a super para tener los métodos del padre QObject
-        
-        self.texto_frase = texto_frase              # Variables de instancia: 
-        self.longitud = len(texto_frase)            # - la frase en sí - Su longitud
-        self.numero_filas = 1
+
+        self.texto_frase = texto_frase.upper()      # Variables de instancia
+        self.longitud = len(texto_frase)
         self.lista_palabras = self.__separar_palabras__()
-        
+        self.letras_dichas = set()
+
         self.fila1 = []
         self.fila2 = []
         self.fila3 = []
         self.fila4 = []
-        
-        self.filas = self.separar_en_filas()
+
+        self.separar_en_filas()
 
     def __separar_palabras__(self) -> list:
         """Método que separa las palabras, generando una lista
@@ -76,47 +77,63 @@ class Frase(QObject):
                       "fila3":self.fila3, 
                       "fila4":self.fila4}
 
-    # Voy a usar el método center para rellenar los espacios pero este algoritmo funcionaría:
-    
-    # def __rellenar_espacios__(self, fila) -> str:
-    #     espacios_necesarios = 0
-    #     if len(fila) == 12:
-    #         return fila
-    #     else:
-    #         espacios_necesarios = 12 - len(fila)
+    def __enmascarar_fila__(self, fila: list) -> str:
+        """Toma una fila, la centra y oculta las letras no dichas."""
+        fila_original = (" ").join(fila).center(12, " ")
+        resultado = ""
+        for l in fila_original:
+            if l in self.letras_dichas:
+                resultado += l
+            elif l == " ":
+                resultado += "_"
+            else:
+                resultado += " "
+        return resultado
 
-    #     if espacios_necesarios % 2 == 0:                    # Espacios necesarios son pares
-    #         espacio_lado = int(espacios_necesarios / 2)     # Espacios a cada lado
-    #     else:                                               # Espacios necesarios son impares
-    #         espacio_lado = int((espacios_necesarios - 1)  / 2)
-    #         fila = fila + " "                               # Añado un espacio de base a la derecha
-
-    #     for i in range(espacio_lado):                       # Bucle para añadir espacios
-    #         fila = " " + fila
-    #         fila = fila + " "
-    #     return fila
-
-    @pyqtProperty(str)
+    @pyqtProperty(str, notify = actualizar_tablero)
     def fila1_propi(self) -> str:
         """Propiedad para qml que envía la fila 1"""
-        return (" ").join(self.fila1).center(12, " ")
+        return self.__enmascarar_fila__(self.fila1)
 
-    @pyqtProperty(str)
+    @pyqtProperty(str, notify = actualizar_tablero)
     def fila2_propi(self) -> str:
         """Propiedad para qml que envía la fila 2"""
-        return (" ").join(self.fila2).center(12, " ")
+        return self.__enmascarar_fila__(self.fila2)
 
-    @pyqtProperty(str)
+    @pyqtProperty(str, notify = actualizar_tablero)
     def fila3_propi(self) -> str:
         """Propiedad para qml que envía la fila 3"""
-        return (" ").join(self.fila3).center(12, " ")
+        return self.__enmascarar_fila__(self.fila3)
 
-    @pyqtProperty(str)
+    @pyqtProperty(str, notify = actualizar_tablero)
     def fila4_propi(self) -> str:
         """Propiedad para qml que envía la fila 4"""
-        return (" ").join(self.fila4).center(12, " ")
+        return self.__enmascarar_fila__(self.fila4)
+
+    # Establecer un set para acumular letras únicas y que no se repitan
+    @pyqtSlot(str, result= bool)
+    def esta_letra_dicha(self, letra: str) -> bool | None:
+        """Método activo para que el usuario intdroduzca letras a comprobar
+
+        Args:
+            letra (str): Letra que se quiere comprobar
+
+        Returns:
+            str | None: Devuelve la letra si la letra no e ha dicho
+        """
+        if not letra.isalpha():
+            return False
+        elif letra in self.letras_dichas:
+            print(f"La letra {letra} ya se ha dicho")
+            return False
+        else:
+            print(f"¡La letra {letra} es válida!")
+            self.letras_dichas.add(letra)
+            self.actualizar_tablero.emit()
+            return True
+
 
 
 if __name__ == "__main__":
-    prueba = Frase("Prueba ")
-    print(len(prueba.fila1_propi()))
+    prueba = Frase("La ruleta de la suerte")
+

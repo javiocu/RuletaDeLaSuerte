@@ -11,6 +11,10 @@ Window {
     title: "La ruleta de la suerte"
     color: "#004d40"
     Column {
+        focus: true
+        Keys.onPressed: (event) => {
+        fraseBackend.esta_letra_dicha(event.text.toUpperCase())
+        }
         anchors.centerIn: parent
         spacing: 10
         // Fila 1
