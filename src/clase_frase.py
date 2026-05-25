@@ -136,4 +136,3 @@ class Frase(QObject):
 
 if __name__ == "__main__":
     prueba = Frase("La ruleta de la suerte")
-
