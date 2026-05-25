@@ -8,6 +8,8 @@ class Jugador():
         self.name = nombre
         self.dinero = 0
 
+
+
 class Partida(QObject):
     """Clase orientada a organizar la partida"""
     jugador_exitente = pyqtSignal()
@@ -15,14 +17,18 @@ class Partida(QObject):
     def __init__(self) -> None:
         super().__init__()
         self.lista_jugadores = []
-
+        self.existe = False
+        
     @pyqtSlot(str)
     def anadir_jugador(self, nombre: str) -> None:
         """Registra nuevos jugadores en la partida, dede el qml."""
-        nombre_nuevo = nombre.strip()
+        nombre_nuevo = nombre.lower().strip()
+        self.existe = False
+        self.jugador_exitente.emit()
         if nombre_nuevo:
             for jugador in self.lista_jugadores:
                 if nombre_nuevo == jugador.name:
+                    self.existe = True
                     self.jugador_exitente.emit()
                     return
             jugador = Jugador(nombre)
@@ -36,4 +42,4 @@ class Partida(QObject):
     @pyqtProperty(bool, notify = jugador_exitente)
     def aviso_jugador_existente(self) -> bool:
         """Devuelve valor true para mostrar mensaje de jugador existente"""
-        return True
+        return self.existe

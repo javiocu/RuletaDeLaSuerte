@@ -27,11 +27,21 @@ Window {
             text: "¡Comenzar partida!"
             onClicked: {
                 partidaIniciada = true
+                tableroJuego.forceActiveFocus() // Cuando empieza la partida pongo el foco del teclado en la columna con el tablero.
                 
             }
         }
+    Row {
+        visible: partidaBackend.aviso_jugador_existente
+        Text {
+            color: "#ffffff"
+            font.pixelSize: 25
+            text: "Ya existe un jugador con ese nombre"
+        }
+    }
     }
     Column {
+        id: tableroJuego
         focus: true
         visible: partidaIniciada
         Keys.onPressed: (event) => {
