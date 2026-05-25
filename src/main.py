@@ -13,7 +13,7 @@ def ruleta_suerte():
 
     # Creo intancia de frase para cargar, en el futuro se añadira la opción de
     # cogerla desde un archivo de frases
-    frase_juego = Frase("La ruleta de la suerte")
+    frase_juego = Frase("La lulu no se espera que este haciendo esto")
 
     # Arranco instancia con archivo qml del espacio
     engine.rootContext().setContextProperty("fraseBackend", frase_juego)

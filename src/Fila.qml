@@ -8,7 +8,7 @@ Row {
         Rectangle {
             width: 50
             height: 100
-            color: modelData === " " ? "#0300b9" : "#ffffff"
+            color: modelData === "_" ? "#0300b9" : "#ffffff"
             border.color: "#000000"
             border.width: 2
 
@@ -16,6 +16,7 @@ Row {
                 anchors.centerIn: parent // Pone la letra en el centro del rectángulo
                 text: modelData
                 font.pixelSize: 24
+                visible: modelData !== "_"
                 }
             }
 
