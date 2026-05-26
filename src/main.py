@@ -5,7 +5,7 @@ from PyQt6.QtGui import QGuiApplication
 from PyQt6.QtQml import QQmlApplicationEngine
 
 from clase_frase import Frase
-from clase_jugador import Partida
+from clase_jugador_partida import Partida
 
 import os
 os.environ["QT_QUICK_CONTROLS_STYLE"] = "Fusion" # Necesario para poder mostrar textos en windows. Estilo genérico.
