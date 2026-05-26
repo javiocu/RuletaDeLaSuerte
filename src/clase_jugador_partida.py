@@ -1,4 +1,4 @@
-"""Módulo que almacena la clase jugador, para manejar la entidad de jugadores"""
+"""Módulo que almacena la clase jugador y partida, para manejar la entidad de jugadores"""
 from PyQt6.QtCore import QObject, pyqtSlot, pyqtProperty, pyqtSignal
 
 class Jugador():
