@@ -28,7 +28,6 @@ Window {
             onClicked: {
                 partidaIniciada = true
                 tableroJuego.forceActiveFocus() // Cuando empieza la partida pongo el foco del teclado en la columna con el tablero.
-                
             }
         }
     Row {
@@ -42,7 +41,7 @@ Window {
     }
     Column {
         id: tableroJuego
-        focus: true
+        focus: partidaIniciada
         visible: partidaIniciada
         Keys.onPressed: (event) => {
             fraseBackend.esta_letra_dicha(event.text.toUpperCase())
