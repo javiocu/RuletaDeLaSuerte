@@ -13,17 +13,13 @@ Window {
     property bool partidaIniciada: false // Propiedad para controlar el inicio
 
     Column {
-        id: pantallaInicio
+        id: pantallaInicial
         visible: !partidaIniciada
         anchors.centerIn: parent
         spacing: 10
         PantallaInicio {
             // Pantalla inicio en otro archivo para facilitar la lectura
         }
-    }
-
-    MarcadorPuntuación {
-
     }
 
     Column {
