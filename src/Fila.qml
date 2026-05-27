@@ -15,7 +15,7 @@ Row {
             Text {
                 anchors.centerIn: parent // Pone la letra en el centro del rectángulo
                 text: modelData
-                font.pixelSize: 24
+                font.pixelSize: 35
                 visible: modelData !== "_"
                 }
             }
