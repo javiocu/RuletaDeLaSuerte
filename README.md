@@ -1,10 +1,10 @@
 # La Ruleta de la Suerte 🎡
 
-¡Bienvenido a **La Ruleta de la Suerte**! Este es un proyecto secreto desarrollado en Python utilizando **PyQt6** y **QML (Qt Quick)** para recrear el famoso concurso de televisión. La aplicación cuenta con una interfaz gráfica moderna, animada y una separación limpia entre la lógica del juego y el diseño visual.
+Proyecto desarrollado en Python utilizando **PyQt6** y **QML (Qt Quick)** para recrear el concurso de televisión. La aplicación contará con una interfaz gráfica moderna, animada y una separación limpia entre la lógica del juego y el diseño visual.
 
 ---
 
-## 🚀 Características Actuales
+## 🚀 Características potenciales
 
 - **Frontend dinámico:** Diseñado completamente en QML con transiciones fluidas entre pantallas.
 - **Sistema de Registro:** Permite añadir múltiples jugadores de forma consecutiva desde la interfaz gráfica.
@@ -16,22 +16,16 @@
 
 ## 🛠️ Arquitectura del Proyecto
 
-El proyecto sigue una arquitectura **MVVM / Backend-Frontend** bien definida:
+El proyecto sigue una arquitectura:
 
 - **`src/main.py`**: El motor principal de la aplicación. Configura el entorno de Qt, instancia las clases de Python y las conecta al contexto de QML.
 - **`src/clase_frase.py`**: Gestiona la frase oculta del tablero, el estado de las letras (adivinadas/ocultas) y la distribución en las 4 filas reglamentarias.
-- **`src/clase_jugador.py`**: Maneja la entidad de los jugadores (nombre, puntuación/dinero) y la lógica de la partida (control de turnos y validación de duplicados).
+- **`src/clase_jugador_partida.py`**: Maneja la entidad de los jugadores (nombre, puntuación/dinero) y la lógica de la partida (control de turnos y validación de jugadores).
 - **`src/main.qml`**: Define toda la interfaz gráfica, botones, campos de texto y la lógica de eventos del teclado (`Keys.onPressed`).
 
----
-
-## 🔧 Requisitos e Instalación
-
-### Entorno de Desarrollo
-Este proyecto está desarrollado y testeado en una torre con **Windows 11** utilizando **Visual Studio Code** y un entorno virtual de Python (`venv`).
 
 ### Dependencias
-Asegúrate de tener instalado Python 3.10 o superior y la librería de PyQt6:
+Tener instalado Python 3.10. Usar pip en entorno virtual para intalar requisitos con archivo 'requerimientos.txt'
 
 ```bash
-pip install PyQt6
+pip install -r requerimientos.txt
