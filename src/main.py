@@ -16,11 +16,11 @@ def ruleta_suerte():
     engine = QQmlApplicationEngine() # Creo instancia del motor de comunicación con qml para interpretar el archivo qml
 
     # Creo intancia de frase para cargar, en el futuro se añadira la opción de
-    # cogerla desde un archivo de frases
+    # cogerla desde un archivo de frases. Arranco partida
     frase_juego = Frase("La lulu no se espera que este haciendo esto")
     partida = Partida()
 
-    # Arranco instancia con archivo qml del espacio
+    # Arranco instancias con archivos qml del espacio
     engine.rootContext().setContextProperty("fraseBackend", frase_juego)
     engine.rootContext().setContextProperty("partidaBackend", partida)
 
