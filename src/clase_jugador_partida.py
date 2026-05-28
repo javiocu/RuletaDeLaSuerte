@@ -29,7 +29,6 @@ class Partida(QObject):
         """Registra nuevos jugadores en la partida, dede el qml."""
         nombre_nuevo = nombre.lower().strip()
         self.existe = False
-        self.jugador_exitente.emit()
         if nombre_nuevo:
             jugador = Jugador(nombre_nuevo)
             for ya_inscrito in self.lista_jugadores:
@@ -38,6 +37,7 @@ class Partida(QObject):
                     self.jugador_exitente.emit()
                     return None
             self.lista_jugadores.append(jugador)
+            self.jugador_exitente.emit()
             total = len(self.lista_jugadores)
             plural = "jugador"
             if total > 1:
@@ -67,7 +67,7 @@ class Partida(QObject):
             lista_mandar.append(f"{nombre}: {dinero}")
         return lista_mandar
 
-    def __ordenar_jugadores__(self) -> dict:
+    def __ordenar_jugadores__(self) -> list:
         """Método privado que ordena jugadores en función del dinero que lleven.
 
         Returns:
@@ -76,8 +76,8 @@ class Partida(QObject):
         diccionario_ordenado = {}
         for jugador in self.lista_jugadores:
             diccionario_ordenado[jugador.name] = int(jugador.dinero)
-        diccionario_ordenado = sorted(diccionario_ordenado.items(), reverse=True, key=lambda key: key[1])
-        return diccionario_ordenado
+        lista_ordenada = sorted(diccionario_ordenado.items(), reverse=True, key=lambda dinero: dinero[1])
+        return lista_ordenada
 
 
 
