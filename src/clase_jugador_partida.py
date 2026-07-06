@@ -1,6 +1,7 @@
 """Módulo que almacena la clase jugador y partida, para manejar la entidad de jugadores"""
 from PyQt6.QtCore import QObject, pyqtSlot, pyqtProperty, pyqtSignal
 from random import randint
+from clase_gajos import Gajo
 
 class Jugador():
     """Clase orientada a describir Jugadores"""
@@ -21,6 +22,16 @@ class Partida(QObject):
         self.lista_jugadores = []
         self.existe = False
         self.turno = 0
+        self.ruleta = [
+            Gajo("25€", 25, False, False),
+            Gajo("50€", 50, False, False),
+            Gajo("75€", 75, False, False),
+            Gajo("100€", 100, False, False),
+            Gajo("150€", 150, False, False),
+            Gajo("200€", 200, False, False),
+            Gajo("Quiebra", 0, True, False),
+            Gajo("Pierde turno", 0, False, True)
+        ]
 
     @pyqtSlot(str)
     def anadir_jugador(self, nombre: str) -> None:
