@@ -13,7 +13,7 @@ Row {
             Image {
                 id: pictureInicial
                 anchors.horizontalCenter: parent.horizontalCenter
-                source: "file:./src/foto_portada.jpg"
+                source: "file:./src/foto_ruleta_portada.png"
                 width: 400
                 height: 300
                 fillMode: Image.PreserveAspectFit // Preservar tamaño foto
