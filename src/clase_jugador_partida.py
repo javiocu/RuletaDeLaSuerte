@@ -1,16 +1,12 @@
 """Módulo que almacena la clase jugador y partida, para manejar la entidad de jugadores"""
 from PyQt6.QtCore import QObject, pyqtSlot, pyqtProperty, pyqtSignal
+from random import randint
 
 class Jugador():
     """Clase orientada a describir Jugadores"""
 
     def __init__(self, nombre: str) -> None:
         self.name = nombre
-        # if nombre == "lulu":
-        #     self.dinero = 3
-        # elif nombre == "juan":
-        #     self.dinero = 2
-        # else:
         self.dinero = 0
 
 
@@ -18,11 +14,13 @@ class Jugador():
 class Partida(QObject):
     """Clase orientada a organizar la partida"""
     jugador_exitente = pyqtSignal()
+    turno_cambiado = pyqtSignal()
 
     def __init__(self) -> None:
         super().__init__()
         self.lista_jugadores = []
         self.existe = False
+        self.turno = 0
 
     @pyqtSlot(str)
     def anadir_jugador(self, nombre: str) -> None:
@@ -79,11 +77,28 @@ class Partida(QObject):
         lista_ordenada = sorted(diccionario_ordenado.items(), reverse=True, key=lambda dinero: dinero[1])
         return lista_ordenada
 
+    @pyqtSlot()
+    def seleccionar_turno_inicial(self) -> int:
+        """Función para generar el turno inicial cuando se pulsa el botón comenzar 
+        partida en la pantalla de inicio.
+        """
+        self.turno = randint(0, len(self.lista_jugadores)-1)
+        self.turno_cambiado.emit()
 
+    def siguiente_turno(self):
+        """Cambia el turno al siguiente índice.
+        """
+        self.turno = (self.turno + 1) % len(self.lista_jugadores)
+        self.turno_cambiado.emit()
 
 if __name__ == "__main__":
     partida1 = Partida()
     partida1.anadir_jugador("Juan")
     partida1.anadir_jugador("Javi")
     partida1.anadir_jugador("Lulu")
-    print(partida1.__ordenar_jugadores__())
+    partida1.anadir_jugador("pepe")
+    # print(partida1.__ordenar_jugadores__())
+    turno = 0
+    for jugador in partida1.lista_jugadores:
+        print(turno)
+        print(jugador.name)

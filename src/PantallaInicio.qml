@@ -44,6 +44,7 @@ Row {
             text: "¡Comenzar partida!"
             onClicked: {
                 partidaIniciada = true
+                partidaBackend.seleccionar_turno_inicial()
                 tableroJuego.forceActiveFocus() // Cuando empieza la partida pongo el foco del teclado en la columna con el tablero.
             }
         }
