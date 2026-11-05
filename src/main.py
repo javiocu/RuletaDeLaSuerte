@@ -17,7 +17,7 @@ def ruleta_suerte():
 
     # Creo intancia de frase para cargar, en el futuro se añadira la opción de
     # cogerla desde un archivo de frases. Arranco partida
-    frase_juego = Frase("La lulu no se espera que este haciendo esto")
+    frase_juego = Frase("EXTRAORDINARIAMENTE")
     partida = Partida()
 
     # Arranco instancias con archivos qml del espacio
