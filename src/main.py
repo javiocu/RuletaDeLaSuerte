@@ -6,6 +6,7 @@ from PyQt6.QtQml import QQmlApplicationEngine
 
 from clase_frase import Frase
 from clase_jugador_partida import Partida
+import cargar_frases
 
 import os
 os.environ["QT_QUICK_CONTROLS_STYLE"] = "Fusion" # Necesario para poder mostrar textos en windows. Estilo genérico.
@@ -15,9 +16,10 @@ def ruleta_suerte():
     app = QGuiApplication(sys.argv) # sys.argv para que coja los argumentos de la línea de comandos
     engine = QQmlApplicationEngine() # Creo instancia del motor de comunicación con qml para interpretar el archivo qml
 
-    # Creo intancia de frase para cargar, en el futuro se añadira la opción de
-    # cogerla desde un archivo de frases. Arranco partida
-    frase_juego = Frase("EXTRAORDINARIAMENTE")
+    # Creo intancia de frase para cargar
+    ruta_archivo = "src/listado_frases.json"
+    frase_completa = cargar_frases.elegir_frase_json(ruta_archivo)
+    frase_juego = Frase(frase_completa["frase"])
     partida = Partida()
 
     # Arranco instancias con archivos qml del espacio
