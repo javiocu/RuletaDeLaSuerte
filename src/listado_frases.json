@@ -1,0 +1,27 @@
+[
+  {
+    "categoria": "Televisión",
+    "pista": "El concurso de preguntas más famoso de España",
+    "frase": "PASAPALABRA"
+  },
+  {
+    "categoria": "Viajes",
+    "pista": "La ciudad de la Alhambra y las tapas",
+    "frase": "GRANADA"
+  },
+  {
+    "categoria": "Cocina",
+    "pista": "Se hace en la sartén y suele llevar huevo",
+    "frase": "TORTILLA DE PATATAS"
+  },
+  {
+    "categoria": "Música",
+    "pista": "Instrumento de cuerda que se toca con arco",
+    "frase": "VIOLIN"
+  },
+  {
+    "categoria": "Naturaleza",
+    "pista": "Animal que construye su casa con barro",
+    "frase": "GOLONDRINA"
+  }
+]
