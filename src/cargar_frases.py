@@ -1,8 +1,38 @@
-frase = " Los ojos de Ana Maria "
+import json
+from pathlib import Path
+import random
 
-tamaño_fila = 12
 
-def __separar_palabras__(frase:str):
+def elegir_frase_json(ruta_json:str):
+    try:
+        texto = Path(ruta_json).read_text()
+    except FileNotFoundError:
+        return f"ERROR ARCHIVO: No existe el archivo en el path esperado: {ruta_json}"
+    try:
+        lista_frases = json.loads(texto)
+    except json.decoder.JSONDecodeError:
+        return "ERROR DE FORMATO: El archivo no tiene un formato tipo json."
+    frase_completa_final = ""
+    # Cojo una frase aleatoria
+    if hay_frase_valida(lista_frases):
+        while not frase_completa_final:
+            frase_completa_actual = lista_frases[random.choice(range(len(lista_frases)))]
+            if frase_cabe(frase_completa_actual["frase"]):
+                frase_completa_final = frase_completa_actual
+                return frase_completa_final
+    else:
+        print("No hay ninguna frase válida en la lista json.")
+        return False
+    
+
+def hay_frase_valida(lista_frases:list) -> bool:
+    for frase_completa in lista_frases:
+        if frase_cabe(frase_completa["frase"]):
+            return True
+    return False
+
+
+def separar_palabras(frase:str):
     """Separa las frases en palabras individuales, devuelve lista.
 
     Args:
@@ -25,7 +55,10 @@ def frase_cabe(frase:str):
         bool: Indica True o False si la frase cabe o no cabe en las cuatro filas.
     """
     frase = frase.lower().strip()
-    palabras = __separar_palabras__(frase)
+    tamaño_fila = 12
+    palabras = separar_palabras(frase)
+    if frase == "":
+        return False
     if len(frase) > 48:
         return False
     fila1 = []
@@ -49,5 +82,9 @@ def frase_cabe(frase:str):
 
 
 if __name__ == "__main__":
-   
-    print(frase_cabe(frase))
+    print(frase_cabe("   "))
+    print(frase_cabe(""))
+    print(frase_cabe("Hola bueas"))
+    print(frase_cabe("Extraordinariamente"))
+    print(frase_cabe("Qué crees que ocurrirá con esa quinta frase: fallará por longitud total, por no caber en las filas, o por ambas razones"))
+    print(elegir_frase_json("src/listado_frases.json"))
