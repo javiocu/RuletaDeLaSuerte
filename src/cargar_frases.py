@@ -7,11 +7,11 @@ def elegir_frase_json(ruta_json:str):
     try:
         texto = Path(ruta_json).read_text()
     except FileNotFoundError:
-        return f"ERROR ARCHIVO: No existe el archivo en el path esperado: {ruta_json}"
+        raise FileNotFoundError(f"ERROR ARCHIVO: No existe el archivo en el path esperado: {ruta_json}")
     try:
         lista_frases = json.loads(texto)
     except json.decoder.JSONDecodeError:
-        return "ERROR DE FORMATO: El archivo no tiene un formato tipo json."
+        raise Exception("ERROR DE FORMATO: El archivo no tiene un formato tipo json.")
     frase_completa_final = ""
     # Cojo una frase aleatoria
     if hay_frase_valida(lista_frases):
@@ -21,8 +21,7 @@ def elegir_frase_json(ruta_json:str):
                 frase_completa_final = frase_completa_actual
                 return frase_completa_final
     else:
-        print("No hay ninguna frase válida en la lista json.")
-        return False
+        raise Exception("No hay ninguna frase válida en la lista json.")
     
 
 def hay_frase_valida(lista_frases:list) -> bool:
@@ -87,4 +86,4 @@ if __name__ == "__main__":
     print(frase_cabe("Hola bueas"))
     print(frase_cabe("Extraordinariamente"))
     print(frase_cabe("Qué crees que ocurrirá con esa quinta frase: fallará por longitud total, por no caber en las filas, o por ambas razones"))
-    print(elegir_frase_json("src/listado_frases.json"))
+    print(elegir_frase_json("src/listado_frases.jso"))
