@@ -12,4 +12,3 @@ class Gajo():
         self.valor = valor
         self.quiebra = quiebra
         self.pierde_turno = pierde_turno
-        

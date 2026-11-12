@@ -2,6 +2,7 @@
 from PyQt6.QtCore import QObject, pyqtSlot, pyqtProperty, pyqtSignal
 from random import randint
 from clase_gajos import Gajo
+import random
 
 class Jugador():
     """Clase orientada a describir Jugadores"""
@@ -89,27 +90,35 @@ class Partida(QObject):
         return lista_ordenada
 
     @pyqtSlot()
-    def seleccionar_turno_inicial(self) -> int:
+    def seleccionar_turno_inicial(self) -> None:
         """Función para generar el turno inicial cuando se pulsa el botón comenzar 
         partida en la pantalla de inicio.
         """
         self.turno = randint(0, len(self.lista_jugadores)-1)
         self.turno_cambiado.emit()
 
-    def siguiente_turno(self):
+    def _siguiente_turno(self) -> None:
         """Cambia el turno al siguiente índice.
         """
         self.turno = (self.turno + 1) % len(self.lista_jugadores)
         self.turno_cambiado.emit()
 
+    def __tirar_ruleta(self) -> Gajo:
+        gajo_tocado = random.choice(self.ruleta)
+        return gajo_tocado
+
+    def aplicar_gajo(gajo = Gajo) -> None:
+        
+
 if __name__ == "__main__":
     partida1 = Partida()
-    partida1.anadir_jugador("Juan")
-    partida1.anadir_jugador("Javi")
-    partida1.anadir_jugador("Lulu")
-    partida1.anadir_jugador("pepe")
-    # print(partida1.__ordenar_jugadores__())
-    turno = 0
-    for jugador in partida1.lista_jugadores:
-        print(turno)
-        print(jugador.name)
+    # partida1.anadir_jugador("Juan")
+    # partida1.anadir_jugador("Javi")
+    # partida1.anadir_jugador("Lulu")
+    # partida1.anadir_jugador("pepe")
+    # # print(partida1.__ordenar_jugadores__())
+    # turno = 0
+    # for jugador in partida1.lista_jugadores:
+    #     print(turno)
+    #     print(jugador.name)
+    print(partida1.tirar_ruleta().nombre)
