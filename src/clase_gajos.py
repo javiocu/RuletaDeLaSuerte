@@ -12,3 +12,13 @@ class Gajo():
         self.valor = valor
         self.quiebra = quiebra
         self.pierde_turno = pierde_turno
+        self.mensaje = ""
+        self.__mensaje_mostrar()
+
+    def __mensaje_mostrar(self):
+        if self.quiebra:
+            self.mensaje = "¡QUIEBRA!"
+        elif self.pierde_turno:
+            self.mensaje = "¡Pierdes el turno!"
+        else:
+            self.mensaje = f"¡Ganas {self.valor} por letra!"
